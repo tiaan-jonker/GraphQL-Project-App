@@ -6,7 +6,7 @@ const jobs = [
     description:
       'Visual design and copyright for the Death Star marketing campaign',
     status: 'In Progress',
-    classification: 'Pro-bono',
+    remuneration: 'Pro-bono',
     urgent: false,
   },
   {
@@ -15,7 +15,7 @@ const jobs = [
     name: 'Death Star Website',
     description: 'Setting up and finishing off the Death Star website.',
     status: 'In Progress',
-    classification: 'Paid',
+    remuneration: 'Paid',
     urgent: true,
   },
   {
@@ -25,7 +25,7 @@ const jobs = [
     description:
       'Obi-Wan wants a personal website as part of running for senate seat campaign.',
     status: 'In Progress',
-    classification: 'Paid',
+    remuneration: 'Paid',
     urgent: false,
   },
   {
@@ -34,7 +34,7 @@ const jobs = [
     name: 'Yoda Wise Sayings Website',
     description: 'Yoda wants a website to archive all his wise sayings',
     status: 'In Progress',
-    classification: 'Paid',
+    remuneration: 'Paid',
     urgent: false,
   },
   {
@@ -43,7 +43,7 @@ const jobs = [
     name: 'Find Father Website',
     description: 'Luke wants a website as part of finding his real father.',
     status: 'Done',
-    classification: 'Pro-bono',
+    remuneration: 'Pro-bono',
     urgent: true,
   },
   {
@@ -53,7 +53,7 @@ const jobs = [
     description:
       'Han wants a website to list and sell all the metal and scrap he has gathered.',
     status: 'In Progress',
-    classification: 'Paid',
+    remuneration: 'Paid',
     urgent: false,
   },
 ]

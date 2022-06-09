@@ -27,7 +27,7 @@ const JobType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
-    classification: { type: GraphQLString },
+    remuneration: { type: GraphQLString },
     urgent: { type: GraphQLBoolean },
     client: {
       type: ClientType,
