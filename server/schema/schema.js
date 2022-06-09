@@ -24,12 +24,17 @@ const JobType = new GraphQLObjectType({
   name: 'Job',
   fields: () => ({
     id: { type: GraphQLID },
-    clientId: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
     classification: { type: GraphQLString },
     urgent: { type: GraphQLBoolean },
+    client: {
+      type: ClientType,
+      resolve(parent, args) {
+        return clients.find((client) => client.id === parent.clientId)
+      },
+    },
   }),
 })
 
