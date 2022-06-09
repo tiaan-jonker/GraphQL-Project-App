@@ -1,5 +1,8 @@
 const { jobs, clients } = require('../sampleData')
 
+const Client = require('../models/Client')
+const Job = require('../models/Job')
+
 const {
   GraphQLObjectType,
   GraphQLID,
@@ -32,7 +35,7 @@ const JobType = new GraphQLObjectType({
     client: {
       type: ClientType,
       resolve(parent, args) {
-        return clients.find((client) => client.id === parent.clientId)
+        return clients.findById(parent.clientId)
       },
     },
   }),
@@ -44,27 +47,27 @@ const RootQuery = new GraphQLObjectType({
     clients: {
       type: new GraphQLList(ClientType),
       resolve(parent, args) {
-        return clients
+        return Client.find()
       },
     },
     client: {
       type: ClientType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return clients.find((client) => client.id === args.id)
+        return Client.findById(args.id)
       },
     },
     jobs: {
       type: new GraphQLList(JobType),
       resolve(parent, args) {
-        return jobs
+        return Job.find()
       },
     },
     job: {
       type: JobType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return jobs.find((job) => job.id === args.id)
+        return Job.findById(args.id)
       },
     },
   },

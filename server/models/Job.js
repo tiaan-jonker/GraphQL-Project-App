@@ -25,4 +25,4 @@ const ClientSchema = Schema({
   },
 })
 
-module.exports = mongoose.model('Project', ClientSchema)
+module.exports = mongoose.model('Job', ClientSchema)
