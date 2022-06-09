@@ -1,4 +1,4 @@
-const projects = [
+const jobs = [
   {
     id: '1',
     clientId: '1',
@@ -6,16 +6,17 @@ const projects = [
     description:
       'Visual design and copyright for the Death Star marketing campaign',
     status: 'In Progress',
-    classification: 'Pro-bono'
+    classification: 'Pro-bono',
+    urgent: false,
   },
   {
     id: '2',
     clientId: '1',
     name: 'Death Star Website',
-    description:
-      'Setting up and finishing off the Death Star website.',
+    description: 'Setting up and finishing off the Death Star website.',
     status: 'In Progress',
-    classification: 'Paid'
+    classification: 'Paid',
+    urgent: true,
   },
   {
     id: '3',
@@ -24,23 +25,26 @@ const projects = [
     description:
       'Obi-Wan wants a personal website as part of running for senate seat campaign.',
     status: 'In Progress',
-    classification: 'Paid'
+    classification: 'Paid',
+    urgent: false,
   },
   {
     id: '4',
     clientId: '3',
     name: 'Yoda Wise Sayings Website',
-    description:
-      'Yoda wants a website to archive all his wise sayings',
+    description: 'Yoda wants a website to archive all his wise sayings',
     status: 'In Progress',
+    classification: 'Paid',
+    urgent: false,
   },
   {
     id: '5',
     clientId: '4',
     name: 'Find Father Website',
-    description:
-      'Luke wants a website as part of finding his real father.',
+    description: 'Luke wants a website as part of finding his real father.',
     status: 'Done',
+    classification: 'Pro-bono',
+    urgent: true,
   },
   {
     id: '6',
@@ -49,8 +53,10 @@ const projects = [
     description:
       'Han wants a website to list and sell all the metal and scrap he has gathered.',
     status: 'In Progress',
+    classification: 'Paid',
+    urgent: false,
   },
-];
+]
 
 const clients = [
   {
@@ -58,34 +64,36 @@ const clients = [
     name: 'Darth Vader',
     email: 'imyourdaddy@gmail.com',
     phone: '021-639-000',
-    address: 'Death Star', 
+    address: 'Death Star',
   },
   {
     id: '2',
     name: 'Obi-Wan Kenobi',
     email: 'youwerethechosenone@gmail.com',
     phone: '021-639-001',
-    address: 'Stewjon'
+    address: 'Stewjon',
   },
   {
     id: '3',
     name: 'Yoda',
     email: 'wiseiam@gmail.com',
     phone: '021-639-002',
-    address: 'Dagobah'
+    address: 'Dagobah',
   },
   {
     id: '4',
     name: 'Luke Skywalker',
     email: 'iswearnothinghappened@gmail.com',
     phone: '021-639-003',
-    address: 'Tatooine'
+    address: 'Tatooine',
   },
   {
     id: '5',
     name: 'Han Solo',
     email: 'watchthis@gmail.com',
     phone: '021-639-004',
-    address: 'Corellia'
+    address: 'Corellia',
   },
-];
+]
+
+module.exports = { jobs, clients }
