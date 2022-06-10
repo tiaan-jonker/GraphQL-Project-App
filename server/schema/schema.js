@@ -1,5 +1,3 @@
-const { jobs, clients } = require('../sampleData')
-
 const Client = require('../models/Client')
 const Job = require('../models/Job')
 
@@ -10,6 +8,7 @@ const {
   GraphQLSchema,
   GraphQLList,
   GraphQLBoolean,
+  GraphQLNonNull,
 } = require('graphql')
 
 const ClientType = new GraphQLObjectType({
@@ -41,6 +40,7 @@ const JobType = new GraphQLObjectType({
   }),
 })
 
+// Fetching data
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -73,6 +73,42 @@ const RootQuery = new GraphQLObjectType({
   },
 })
 
+// Mutations
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addClient: {
+      type: ClientType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        phone: { type: GraphQLNonNull(GraphQLString) },
+        address: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        const client = new Client({
+          name: args.name,
+          email: args.email,
+          phone: args.phone,
+          address: args.address,
+        })
+
+        return client.save()
+      },
+    },
+    deleteClient: {
+      type: ClientType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Client.findByIdAndRemove(args.id)
+      },
+    },
+  },
+})
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 })
