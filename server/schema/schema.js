@@ -36,7 +36,7 @@ const JobType = new GraphQLObjectType({
     client: {
       type: ClientType,
       resolve(parent, args) {
-        return clients.findById(parent.clientId)
+        return Client.findById(parent.clientId)
       },
     },
   }),
@@ -99,6 +99,7 @@ const mutation = new GraphQLObjectType({
         return client.save()
       },
     },
+    
     updateClient: {
       type: ClientType,
       args: {
@@ -108,6 +109,7 @@ const mutation = new GraphQLObjectType({
         return Client.findByIdAndUpdate(args.id)
       },
     },
+    
     deleteClient: {
       type: ClientType,
       args: {
@@ -145,16 +147,7 @@ const mutation = new GraphQLObjectType({
           }),
           defaultValue: 'Paid',
         },
-        urgent: {
-          type: new GraphQLBoolean({
-            name: 'UrgentType',
-            values: {
-              true: { value: true },
-              false: { value: false },
-            },
-          }),
-          defaultValue: false,
-        },
+        // add urgent
         clientId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
@@ -164,9 +157,64 @@ const mutation = new GraphQLObjectType({
           status: args.status,
           remuneration: args.remuneration,
           urgent: args.urgent,
-          clientId: args.clientId
+          clientId: args.clientId,
         })
-      }
+
+        return job.save()
+      },
+    },
+
+    deleteJob: {
+      type: JobType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Job.findByIdAndRemove(args.id)
+      },
+    },
+
+    updateJob: {
+      type: JobType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        status: {
+          type: new GraphQLEnumType({
+            name: 'JobStatusUpdate',
+            values: {
+              new: { value: 'Not Started' },
+              progress: { value: 'In Progress' },
+              completed: { value: 'completed' },
+            },
+          }),
+        },
+        remuneration: {
+          type: new GraphQLEnumType({
+            name: 'RemunerationTypeUpdate',
+            values: {
+              paid: { value: 'Paid' },
+              free: { value: 'Pro-bono' },
+            },
+          }),
+          defaultValue: 'Paid',
+        },
+      },
+      resolve(parent, args) {
+        return Job.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name,
+              description: args.description,
+              status: args.status,
+              remuneration: args.remuneration,
+            },
+          },
+          { new: true }
+        )
+      },
     },
   },
 })
