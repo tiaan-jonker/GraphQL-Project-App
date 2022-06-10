@@ -9,7 +9,9 @@ const {
   GraphQLList,
   GraphQLBoolean,
   GraphQLNonNull,
+  GraphQLEnumType,
 } = require('graphql')
+const { assertValidExecutionArguments } = require('graphql/execution/execute')
 
 const ClientType = new GraphQLObjectType({
   name: 'Client',
@@ -77,6 +79,7 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
+    // Clients
     addClient: {
       type: ClientType,
       args: {
@@ -96,6 +99,15 @@ const mutation = new GraphQLObjectType({
         return client.save()
       },
     },
+    updateClient: {
+      type: ClientType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Client.findByIdAndUpdate(args.id)
+      },
+    },
     deleteClient: {
       type: ClientType,
       args: {
@@ -104,6 +116,57 @@ const mutation = new GraphQLObjectType({
       resolve(parent, args) {
         return Client.findByIdAndRemove(args.id)
       },
+    },
+
+    // Jobs
+    addJob: {
+      type: JobType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        status: {
+          type: new GraphQLEnumType({
+            name: 'JobStatus',
+            values: {
+              new: { value: 'Not Started' },
+              progress: { value: 'In Progress' },
+              completed: { value: 'completed' },
+            },
+          }),
+          defaultValue: 'Not Started',
+        },
+        remuneration: {
+          type: new GraphQLEnumType({
+            name: 'RemunerationType',
+            values: {
+              paid: { value: 'Paid' },
+              free: { value: 'Pro-bono' },
+            },
+          }),
+          defaultValue: 'Paid',
+        },
+        urgent: {
+          type: new GraphQLBoolean({
+            name: 'UrgentType',
+            values: {
+              true: { value: true },
+              false: { value: false },
+            },
+          }),
+          defaultValue: false,
+        },
+        clientId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const job = new Job({
+          name: args.name,
+          description: args.description,
+          status: args.status,
+          remuneration: args.remuneration,
+          urgent: args.urgent,
+          clientId: args.clientId
+        })
+      }
     },
   },
 })
