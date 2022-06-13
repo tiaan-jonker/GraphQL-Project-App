@@ -7,7 +7,6 @@ const ADD_CLIENT = gql`
       name
       email
       phone
-      address
     }
   }
 `
@@ -19,7 +18,6 @@ const DELETE_CLIENT = gql`
       name
       email
       phone
-      address
     }
   }
 `

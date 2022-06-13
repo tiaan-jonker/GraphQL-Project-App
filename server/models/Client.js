@@ -13,9 +13,6 @@ const ClientSchema = Schema({
   phone: {
     type: String,
   },
-  address: {
-    type: String,
-  },
 })
 
 module.exports = mongoose.model('Client', ClientSchema)
