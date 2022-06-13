@@ -5,7 +5,7 @@ import { Spinner } from './Spinner'
 
 export const Clients = () => {
   const { loading, error, data } = useQuery(GET_CLIENTS)
-
+  console.log(data)
   if (loading) return <Spinner />
   if (error) return <p>Something went wrong</p>
 
@@ -22,9 +22,13 @@ export const Clients = () => {
             </tr>
           </thead>
           <tbody>
-            {data.clients.map((client) => (
-              <ClientRow key={client.id} client={client} />
-            ))}
+            {!data.clients.length ? (
+              <td>No client data</td>
+            ) : (
+              data.clients.map((client) => (
+                <ClientRow key={client.id} client={client} />
+              ))
+            )}
           </tbody>
         </table>
       )}

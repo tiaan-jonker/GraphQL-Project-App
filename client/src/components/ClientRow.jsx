@@ -1,7 +1,22 @@
 import { FaTrash } from 'react-icons/fa'
 import { useMutation } from '@apollo/client'
+import { DELETE_CLIENT } from './graphql/clientMutations'
+import { GET_CLIENTS } from './graphql/clientDataQuery'
 
 export const ClientRow = ({ client }) => {
+  const [deleteClient] = useMutation(DELETE_CLIENT, {
+    variables: { id: client.id },
+    update(cache, { data: { deleteClient } }) {
+      const { clients } = cache.readQuery({ query: GET_CLIENTS })
+      cache.writeQuery({
+        query: GET_CLIENTS,
+        data: {
+          clients: clients.filter((client) => client.id !== deleteClient.id),
+        },
+      })
+    },
+  })
+
   return (
     <tr>
       <td>{client.name}</td>
@@ -9,7 +24,7 @@ export const ClientRow = ({ client }) => {
       <td>{client.phone}</td>
       <td>{client.address}</td>
       <td>
-        <button className='btn btn-danger btn-sm'>
+        <button className='btn btn-danger btn-sm' onClick={deleteClient}>
           <FaTrash />
         </button>
       </td>
