@@ -1,7 +1,7 @@
 import { useState } from 'react'
 // import { FaUser } from 'react-icons'
 import { useMutation } from '@apollo/client'
-import { GET_CLIENTS } from './graphql/clientDataQuery'
+import { GET_CLIENTS } from './graphql/queries/clients'
 import { ADD_CLIENT } from './graphql/clientMutations'
 import { useNavigate } from 'react-router-dom'
 

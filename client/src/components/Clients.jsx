@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { GET_CLIENTS } from './graphql/clientDataQuery'
+import { GET_CLIENTS } from './graphql/queries/clients'
 import { Link } from 'react-router-dom'
 import { ClientRow } from './ClientRow'
 import { Spinner } from './Spinner'

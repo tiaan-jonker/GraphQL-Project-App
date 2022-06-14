@@ -1,7 +1,7 @@
 import { FaTrash } from 'react-icons/fa'
 import { useMutation } from '@apollo/client'
 import { DELETE_CLIENT } from './graphql/clientMutations'
-import { GET_CLIENTS } from './graphql/clientDataQuery'
+import { GET_CLIENTS } from './graphql/queries/clients'
 
 export const ClientRow = ({ client }) => {
   const [deleteClient] = useMutation(DELETE_CLIENT, {

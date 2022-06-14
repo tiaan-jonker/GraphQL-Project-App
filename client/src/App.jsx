@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Clients } from './components/Clients'
 import { AddClient } from './components/AddClient'
+import { Jobs } from './components/Jobs'
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -36,7 +37,15 @@ export const App = () => {
           <Header />
           <div className='container'>
             <Routes>
-              <Route path='/' element={<Clients />} />
+              <Route
+                path='/'
+                element={
+                  <>
+                    <Jobs />
+                    <Clients />
+                  </>
+                }
+              />
               <Route path='/newclient' element={<AddClient />} />
             </Routes>
           </div>
