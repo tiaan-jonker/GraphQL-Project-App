@@ -12,13 +12,6 @@ const ClientSchema = Schema({
     type: String,
     enum: ['Not Started', 'In Progress', 'Completed'],
   },
-  remuneration: {
-    type: String,
-    enum: ['Paid', 'Pro-bono'],
-  },
-  urgent: {
-    type: Boolean,
-  },
   clientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Client',

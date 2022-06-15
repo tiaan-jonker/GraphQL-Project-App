@@ -7,7 +7,7 @@ export const JobCard = ({ job }) => {
         <div className='card-body'>
           <div className='d-flex justify-content-between align-items-center'>
             <div className='card-title'>{job.name}</div>
-            <a className='btn btn-white' href={`/jobs/${job.id}`}>
+            <a className='btn btn-white' href={`/job/${job.id}`}>
               View
             </a>
           </div>

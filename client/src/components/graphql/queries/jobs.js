@@ -10,4 +10,21 @@ const GET_JOBS = gql`
   }
 `
 
-export { GET_JOBS }
+const GET_JOB = gql`
+  query getJob($id: ID!) {
+    job(id: $id) {
+      id
+      name
+      description
+      status
+      client {
+        id
+        name
+        email
+        phone
+      }
+    }
+  }
+`
+
+export { GET_JOBS, GET_JOB }

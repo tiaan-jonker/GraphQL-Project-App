@@ -12,8 +12,11 @@ export const Clients = () => {
 
   return (
     <div>
-      <button type='button' className='btn btn-primary'>
+      <button type='button' className='btn btn-primary mr-3'>
         <Link to='/newclient'>Add client</Link>
+      </button>
+      <button type='button' className='btn btn-primary'>
+        <Link to='/newjob'>Add job</Link>
       </button>
       {!loading && !error && (
         <table className='table table-hover mt-3'>

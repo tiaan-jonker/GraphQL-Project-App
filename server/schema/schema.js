@@ -30,8 +30,6 @@ const JobType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
-    remuneration: { type: GraphQLString },
-    urgent: { type: GraphQLBoolean },
     client: {
       type: ClientType,
       resolve(parent, args) {
@@ -134,17 +132,6 @@ const mutation = new GraphQLObjectType({
           }),
           defaultValue: 'Not Started',
         },
-        remuneration: {
-          type: new GraphQLEnumType({
-            name: 'RemunerationType',
-            values: {
-              paid: { value: 'Paid' },
-              free: { value: 'Pro-bono' },
-            },
-          }),
-          defaultValue: 'Paid',
-        },
-        // add urgent
         clientId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
@@ -187,16 +174,6 @@ const mutation = new GraphQLObjectType({
             },
           }),
         },
-        remuneration: {
-          type: new GraphQLEnumType({
-            name: 'RemunerationTypeUpdate',
-            values: {
-              paid: { value: 'Paid' },
-              free: { value: 'Pro-bono' },
-            },
-          }),
-          defaultValue: 'Paid',
-        },
       },
       resolve(parent, args) {
         return Job.findByIdAndUpdate(
@@ -206,7 +183,6 @@ const mutation = new GraphQLObjectType({
               name: args.name,
               description: args.description,
               status: args.status,
-              remuneration: args.remuneration,
             },
           },
           { new: true }

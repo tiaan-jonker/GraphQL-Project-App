@@ -1,9 +1,11 @@
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
-import { Clients } from './components/Clients'
+import { Home } from './pages/Home'
+import { Job } from './pages/Job'
 import { AddClient } from './components/AddClient'
-import { Jobs } from './components/Jobs'
+import { AddJob } from './components/AddJob'
+import { NotFound } from './pages/NotFound'
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -37,16 +39,11 @@ export const App = () => {
           <Header />
           <div className='container'>
             <Routes>
-              <Route
-                path='/'
-                element={
-                  <>
-                    <Jobs />
-                    <Clients />
-                  </>
-                }
-              />
+              <Route path='/' element={<Home />} />
+              <Route path='/job/:id' element={<Job />} />
               <Route path='/newclient' element={<AddClient />} />
+              <Route path='/newjob' element={<AddJob />} />
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </div>
         </Router>
