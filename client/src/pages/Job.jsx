@@ -30,7 +30,6 @@ export const Job = () => {
           <p className='lead'>{status}</p>
 
           <ClientInfo client={client} />
-
           <DeleteJobButton jobId={data.job.id} />
         </div>
       )}
